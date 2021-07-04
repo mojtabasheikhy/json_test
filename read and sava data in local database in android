@@ -1,0 +1,105 @@
+package com.example.maryam_moazenyzade;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class PostsDatabaseHelper extends SQLiteOpenHelper {
+    // Database Info
+    public PostsDatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+
+    private static final String DATABASE_NAME = "BMI_date_base";
+    private static final int DATABASE_VERSION = 1;
+
+    // Table Names
+    private static final String TABLE_History = "History";
+
+
+    // Post Table Columns
+    private static final String KEY_ID = "id";
+    private static final String KEY_USER_name = "name";
+    private static final String KEY_family = "family";
+    private static final String KEY_weight = "weight";
+    private static final String KEY_age = "age";
+    private static final String KEY_height = "height";
+    private static final String KEY_bmi_resualt = "BMI_resualt";
+
+
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+
+        String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_History +
+                "(" +
+                KEY_ID + " INTEGER PRIMARY KEY," +
+                KEY_USER_name + " TEXT," +
+                KEY_family + " TEXT," +
+                KEY_age + " TEXT," +
+                KEY_weight + " TEXT," +
+                KEY_height + " TEXT,"+
+        KEY_bmi_resualt + " TEXT" +
+                ")";
+        db.execSQL(CREATE_USERS_TABLE);
+    }
+
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (oldVersion != newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_History);
+            onCreate(db);
+        }
+    }
+
+    public ArrayList<History_bmi> read_all_date_completed_history(){
+        ArrayList<History_bmi> all_data=new ArrayList<History_bmi>();
+
+        SQLiteDatabase readable_data_base=this.getReadableDatabase();
+        Cursor cursor=readable_data_base.rawQuery("SELECT * FROM " + TABLE_History,null);
+        while (cursor.moveToNext()){
+             int  Id=(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+             String  name=(cursor.getString(cursor.getColumnIndex(KEY_USER_name)));
+             String  family=(cursor.getString(cursor.getColumnIndex(KEY_family)));
+             int  weight=(cursor.getInt(cursor.getColumnIndex(KEY_weight)));
+             int height =(cursor.getInt(cursor.getColumnIndex(KEY_height)));
+             int  age=(cursor.getInt(cursor.getColumnIndex(KEY_age)));
+             int  bmi_resulat=(cursor.getInt(cursor.getColumnIndex(KEY_bmi_resualt)));
+
+
+             all_data.add(new History_bmi(name,family,weight,height,age,bmi_resulat));
+        }
+        cursor.close();
+        return all_data;
+
+    }
+    public long setdataToDataBase(String name , String family , int age ,int weight,int height,int bmi_resuat){
+        ContentValues data_column =new  ContentValues();
+        data_column.put(KEY_USER_name, name);
+        data_column.put(KEY_family, family);
+        data_column.put(KEY_age, age);
+        data_column.put(KEY_weight, weight);
+        data_column.put(KEY_bmi_resualt, bmi_resuat);
+        data_column.put(KEY_height,height);
+        SQLiteDatabase db=this.getWritableDatabase();
+        long saved=db.insert(TABLE_History,null,data_column);
+        db.close();
+        return saved;
+    }
+
+
+}
