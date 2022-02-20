@@ -1,6 +1,77 @@
 {
   "name": "عنوان فرم یک",
   "description": "توضیحات فرم یک",
-  "shouldScan": "both"
-  
+  "shouldScan": "both",
+  "row": [
+    {
+      "orderShow": "1",
+      "value": "NULL",
+      "title": "نام",
+      "placeholder": "",
+      "ModelShow": "Text"
+    },
+    {
+      "orderShow": "3",
+      "value": "زن=1|مرد=0",
+      "title": "جنسیت",
+      "placeholder": "",
+      "ModelShow": "Radio"
+    },
+    {
+      "orderShow": "3",
+      "value": "زن=1|مرد=0",
+      "title": "جنسیت",
+      "placeholder": "",
+      "ModelShow": "Radio"
+    },
+    {
+      "orderShow": "3",
+      "value": "زن=1|مرد=0",
+      "title": "جنسیت",
+      "placeholder": "",
+      "ModelShow": "Radio"
+    },
+    {
+      "orderShow": "3",
+      "value": "زن=1|مرد=0",
+      "title": "جنسیت",
+      "placeholder": "",
+      "ModelShow": "Radio"
+    },
+    {
+      "orderShow": "3",
+      "value": "زن=1|مرد=0",
+      "title": "جنسیت",
+      "placeholder": "",
+      "ModelShow": "Radio"
+    },
+    {
+      "orderShow": "3",
+      "value": "زن=1|مرد=0",
+      "title": "جنسیت",
+      "placeholder": "",
+      "ModelShow": "Radio"
+    },
+    {
+      "orderShow": "2",
+      "value": "NULL",
+      "title": "نام خانوادگی",
+      "placeholder": "",
+      "ModelShow": "Text"
+    },
+    {
+      "orderShow": "5",
+      "value": "NULL",
+      "title": "آدرس",
+      "placeholder": "آدرس محل سکونت",
+      "ModelShow": "Textarea"
+    },
+    {
+      "orderShow": "4",
+      "value": "عنوان سه=3|عنوان دو=2|عنوان یک=1",
+      "title": "گزینه های مورد نظر خود را انتخاب نمایید:",
+      "placeholder": "",
+      "ModelShow": "Checkbox"
+    }
+  ]
 }
